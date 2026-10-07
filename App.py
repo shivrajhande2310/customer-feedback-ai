@@ -54,3 +54,23 @@ Requirements:
 - Include a suitable subject line.
 - End with "Sincerely, Customer Support Team".
 """
+
+        try:
+            st.info("Connecting to Gemini AI...")
+
+            client = genai.Client(
+                api_key=st.secrets["GEMINI_API_KEY"]
+            )
+
+            with st.spinner("Generating personalized AI response..."):
+                response = client.models.generate_content(
+                    model="gemini-3.5-flash-lite",
+                    contents=prompt
+                )
+
+            st.subheader("📧 AI-Generated Customer Response")
+            st.write(response.text)
+
+        except Exception as e:
+            st.error("Gemini API Error")
+            st.code(str(e))

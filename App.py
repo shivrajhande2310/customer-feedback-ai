@@ -29,10 +29,10 @@ if st.button("Generate AI Response"):
         st.warning("Please enter a critical rating of 1 or 2 stars.")
 
     else:
-        prompt = f"""
+       prompt = f"""
 You are a professional Customer Support Agent.
 
-Write a short, personalized, and empathetic apology email for the customer based ONLY on the information provided below.
+Write a short, personalized, empathetic, and solution-oriented customer support email based ONLY on the information provided below.
 
 Product: {product}
 Rating: {rating} star
@@ -41,30 +41,16 @@ Customer Complaint: {summary}
 
 Requirements:
 - Carefully understand the customer's actual situation and specific complaints.
-- Identify the important problems mentioned by the customer yourself.
-- Tailor the email to the actual product and circumstances described in the complaint.
-- Do not assume a fixed complaint category or product type.
-- Acknowledge the specific issues mentioned by the customer.
+- Acknowledge the important issues mentioned by the customer.
 - Apologize sincerely and show empathy.
+- Clearly communicate that the support team will review the customer's concerns and try their best to help resolve the issue.
 - If multiple problems are mentioned, acknowledge the important ones naturally.
 - Use only facts explicitly stated in the customer review or complaint.
-- Do not invent facts, problems, policies, causes, or solutions.
-- Do not promise a refund, replacement, compensation, or other action unless explicitly mentioned.
+- Do not invent facts, problems, causes, policies, or solutions.
+- Do not guarantee a refund, replacement, compensation, or any specific outcome.
+- Do not claim that an issue has already been fixed.
 - Do not use placeholders such as [Customer Name], [Order ID], or [Your Name].
 - Keep the email professional, natural, concise, and personalized.
 - Include a suitable subject line.
 - End with "Sincerely, Customer Support Team".
 """
-
-        client = genai.Client(
-            api_key=st.secrets["GEMINI_API_KEY"]
-        )
-
-        with st.spinner("Generating personalized AI response..."):
-            response = client.models.generate_content(
-                model="gemini-3.5-flash-lite",
-                contents=prompt
-            )
-
-        st.subheader("📧 AI-Generated Customer Response")
-        st.write(response.text)

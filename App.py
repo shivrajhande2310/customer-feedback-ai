@@ -29,7 +29,7 @@ if st.button("Generate AI Response"):
         st.warning("Please enter a critical rating of 1 or 2 stars.")
 
     else:
-       prompt = f"""
+        prompt = f"""
 You are a professional Customer Support Agent.
 
 Write a short, personalized, empathetic, and solution-oriented customer support email based ONLY on the information provided below.
@@ -53,7 +53,7 @@ Requirements:
 - Keep the email professional, natural, concise, and personalized.
 - Include a suitable subject line.
 - End with "Sincerely, Customer Support Team".
- """
+"""
 
         client = genai.Client(
             api_key=st.secrets["GEMINI_API_KEY"]
